@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ShoppingCart, Plus, Minus, Trash2, ArrowLeft, Package, Truck } from "lucide-react";
+import { ShoppingCart, Plus, Minus, Trash2, ArrowLeft, Package, Truck, MessageCircle } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import OrderSplashScreen from "@/components/OrderSplashScreen";
@@ -153,16 +153,16 @@ const Cart = () => {
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-4">
-            {cartItems.map((item) => (
-              <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+          <div className="lg:col-span-2 space-y-4 animate-in fade-in slide-in-from-left duration-700 delay-200">
+            {cartItems.map((item, index) => (
+              <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 animate-in fade-in slide-in-from-bottom duration-500" style={{ animationDelay: `${index * 150}ms` }}>
                 <CardContent className="p-6">
                   <div className="flex gap-6">
                     <div className="relative">
                       <img 
                         src={item.plant_image} 
                         alt={item.plant_name}
-                        className="w-24 h-24 object-cover rounded-lg"
+                        className="w-24 h-24 object-cover rounded-lg transform hover:scale-110 transition-all duration-300"
                       />
                     </div>
                     
@@ -226,7 +226,7 @@ const Cart = () => {
           </div>
 
           {/* Order Summary */}
-          <div className="space-y-6">
+          <div className="space-y-6 animate-in fade-in slide-in-from-right duration-700 delay-300">
             <Card className="hover:shadow-lg transition-all duration-300">
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-6">Order Summary</h3>
@@ -265,9 +265,10 @@ const Cart = () => {
                 
                 <Button 
                   onClick={handlePlaceOrder}
-                  className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-4 text-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-4 text-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl animate-in fade-in duration-700 delay-500 flex items-center justify-center gap-2"
                 >
-                  Place Order
+                  <MessageCircle className="h-5 w-5" />
+                  Place Order via WhatsApp
                 </Button>
                 
                 {deliveryFee > 0 && (
